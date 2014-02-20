@@ -11,7 +11,7 @@
       var App = angular.module('app', ['restangular'])
       .config(['RestangularProvider', function(RestangularProvider) {
           //RestangularProvider.setBaseUrl('/api/v2')
-          //RestangularProvider.setRestangularFields(selfLink: "links.href")
+          RestangularProvider.setRestangularFields({selfLink: "_links.self"});
       }]);
 
       App.factory('People', ['Restangular', function(Restangular) {
@@ -23,6 +23,13 @@
           People.getList().then(function(people) {
             $scope.people = people;
           });
+
+
+          $scope.view = function(person) {
+            person.get().then(function(person) {
+              $scope.person = person;
+            });
+          };
       }]);
     </script>
   </head>
@@ -31,13 +38,19 @@
     <h1>Hello {{place}}</h1>
     <p>Hello everyone at {{place}}, this is a basic introduction to AngularJS.</p>
 
+    <div data-ng-show="person">
+      <h2>{{person.name}}</h2>
+      <p>I'm currently {{person.age}} years old.</p>
+    </div>
+
+    <hr>
     <p>
       <label>Filter:</label>
       <input type="text" name="filter" data-ng-model="filter" placeholder="Filter the list below...">
     </p>
 
     <ul>
-      <li data-ng-repeat="person in people | filter:filter">
+      <li data-ng-repeat="person in people | filter:filter" data-ng-click="view(person)">
         [{{$index + 1}}] {{person.name}} who is <i>{{person.age}}</i>
       </li>
     </ul>
