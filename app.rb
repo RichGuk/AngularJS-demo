@@ -1,6 +1,6 @@
-$:.unshift '.'
-require 'sinatra'
-require "sinatra/activerecord"
+require 'bundler'
+Bundler.require
+
 set :database, "sqlite3:///app.db"
 
 class People < ActiveRecord::Base
@@ -11,5 +11,11 @@ get '/' do
 end
 
 get '/people' do
-  People.all.to_json
+  @people = People.all
+  jbuilder :index
+end
+
+get '/people/:id' do
+  @person = People.find(params[:id])
+  jbuilder :show
 end
