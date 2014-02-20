@@ -8,6 +8,13 @@
     <script>
       angular.module('app', []).controller('MainController', ['$scope', function($scope) {
           $scope.place = 'Meetup';
+
+          $scope.people = [
+            { name: 'Bob', age: 35 },
+            { name: 'Rich', age: 27 },
+            { name: 'Sarah', age: 24 },
+            { name: 'Lisa', age: 45 },
+          ];
       }]);
     </script>
   </head>
@@ -16,10 +23,10 @@
     <h1>Hello {{place}}</h1>
     <p>Hello everyone at {{place}}, this is a basic introduction to AngularJS.</p>
 
-    <p>
-      <b>You have {{100 - place.length}} remaining of 100 characters.</b>
-      <br>
-      <input name="place" data-ng-model="place" maxlength="100">
-    </p>
+    <ul>
+      <li data-ng-repeat="person in people">
+        [{{$index + 1}}] {{person.name}} who is <i>{{person.age}}</i>
+      </li>
+    </ul>
   </body>
 </html>
