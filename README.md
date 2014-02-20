@@ -20,10 +20,10 @@ First install the needed gems via Bundler.
 bundle install
 ```
 
-Then you will need to setup the database and seed it with example data.
+Now run the migrations and seed the database with random data.
 
 ```
-rake db:setup
+rake db:migrate
 ruby seed.rb 100
 ```
 _Note: you can pass the number of items you wish to create as a parameter to seed.rb (instead of 100 for example)_
