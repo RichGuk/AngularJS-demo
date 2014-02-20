@@ -17,7 +17,9 @@
     <p>Hello everyone at {{place}}, this is a basic introduction to AngularJS.</p>
 
     <p>
-      <input name="place" data-ng-model="place">
+      <b>You have {{100 - place.length}} remaining of 100 characters.</b>
+      <br>
+      <input name="place" data-ng-model="place" maxlength="100">
     </p>
   </body>
 </html>
