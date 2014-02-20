@@ -23,8 +23,13 @@
     <h1>Hello {{place}}</h1>
     <p>Hello everyone at {{place}}, this is a basic introduction to AngularJS.</p>
 
+    <p>
+      <label>Filter:</label>
+      <input type="text" name="filter" data-ng-model="filter" placeholder="Filter the list below...">
+    </p>
+
     <ul>
-      <li data-ng-repeat="person in people">
+      <li data-ng-repeat="person in people | filter:filter">
         [{{$index + 1}}] {{person.name}} who is <i>{{person.age}}</i>
       </li>
     </ul>
