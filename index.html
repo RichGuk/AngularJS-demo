@@ -2,11 +2,19 @@
 <html>
   <head>
     <title>AngularJS Demo</title>
+    <script>
+      document.onreadystatechange = function() {
+        if (document.readyState == 'complete') {
+          var newPlace = 'Meetup';
+          document.getElementById('title-place').innerHTML = newPlace;
+          document.getElementById('content-place').innerHTML = newPlace;
+        }
+      };
+    </script>
   </head>
 
   <body>
-    <h1>Hello World!</h1>
-
-    <p>Hello everyone, this is a basic introduction to AngularJS.</p>
+    <h1>Hello <span id="title-place">World!</span></h1>
+    <p>Hello everyone at <span id="content-place"></span>, this is a basic introduction to AngularJS.</p>
   </body>
 </html>
