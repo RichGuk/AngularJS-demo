@@ -1,6 +1,5 @@
 $:.unshift '.'
-require 'active_record'
-require 'models'
+require 'app'
 
 number = ARGV.first.to_i
 
