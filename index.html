@@ -2,20 +2,27 @@
 <html data-ng-app="app">
   <head>
     <title>AngularJS Demo</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-resource.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/restangular/1.3.1/restangular.min.js"></script>
 
     <script>
-      var App = angular.module('app', ['ngResource']);
+      var App = angular.module('app', ['restangular'])
+      .config(['RestangularProvider', function(RestangularProvider) {
+          //RestangularProvider.setBaseUrl('/api/v2')
+          //RestangularProvider.setRestangularFields(selfLink: "links.href")
+      }]);
 
-      App.factory('People', ['$resource', function($resource) {
-          return $resource('http://localhost:4567/people/:id', { id: '@id' });
+      App.factory('People', ['Restangular', function(Restangular) {
+          return Restangular.all('people');
       }]);
 
       App.controller('MainController', ['$scope', 'People', function($scope, People) {
           $scope.place = 'Meetup';
-          $scope.people = People.query();
+          People.getList().then(function(people) {
+            $scope.people = people;
+          });
       }]);
     </script>
   </head>
