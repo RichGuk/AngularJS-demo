@@ -1,32 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html data-ng-app="app">
   <head>
     <title>AngularJS Demo</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.12/angular.min.js"></script>
+
     <script>
-      jQuery(document).ready(function($) {
-          var $places = $('.js-place');
-          var $input = $('.js-place-input');
-
-          $places.html('World');
-
-          function update() {
-          $places.html($input.val());
-          }
-
-          $input.bind('keydown', function(){
-            setTimeout(update, 0);
-          });
-      });
+      angular.module('app', []).controller('MainController', ['$scope', function($scope) {
+          $scope.place = 'Meetup';
+      }]);
     </script>
   </head>
 
-  <body>
-    <h1>Hello <span class="js-place">World</span>!</h1>
-    <p>Hello everyone at <span class="js-place"></span>, this is a basic introduction to AngularJS.</p>
-
-    <p>
-      <input type="text" name="place" class="js-place-input" value="World">
-    </p>
+  <body data-ng-controller="MainController">
+    <h1>Hello {{place}}</h1>
+    <p>Hello everyone at {{place}}, this is a basic introduction to AngularJS.</p>
   </body>
 </html>
